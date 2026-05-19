@@ -1,0 +1,38 @@
+* Emacs
+:PROPERTIES:
+:CUSTOM_ID: emacs
+:END:
+Created Понедельник 28 августа 2023
+*** misc
+[[https://ianyepan.github.io/posts/setting-up-use-package/]] --- emacs tricks + cool html styling
+https://perchance.org/ai-pixel-art-generator
+*** code snippets
+**** auto-id for org-mode headings
+
+#+begin_src emacs-lisp
+(require 's)
+(defun my/auto-custom-id ()
+  (interactive)
+  (let* ((heading (org-entry-get nil "ITEM"))
+         (custom-id-auto (s-dashed-words (s-downcase (car (s-split "\\[" (car (s-split "(" heading))))))))
+    (org-entry-put nil "CUSTOM_ID" custom-id-auto)))
+#+end_src
+
+#+RESULTS:
+: my/auto-custom-id
+
+**** kanban plugin
+     1. create a table inside your to-do file
+     2. at the bottom of the table insert ~#+TBLFM: @1$1='(kanban-headers)::@2$1..@>$>='(kanban-zero @# $# "-ARCHIVE" 'file)~
+	1. to show tasks in the current file excluding ones with the "ARCHIVE" tag
+*** tips
+**** Org
+***** ~org-cut-subtree~ to cut a subtree to a killring
+***** Org-journal routine
+1. ~org-id-get-create~ for unique IDs
+   1. OR use parent ID with ‘org-id-link-consider-parent-id’ being non-nil
+2. ~org-store-link~
+3. ~org-insert-link~
+**** keyboard layout
+1. ~M-x set-input-method~ : russian-computer
+2. ~M-x toggle-input-method~ OR ~"C-\"~ to switch leyboard layouts with function keys still working
